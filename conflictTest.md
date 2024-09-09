@@ -1,1 +1,1 @@
-Starter text to conflictTest
+Modified text to conflictTest
