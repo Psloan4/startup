@@ -1,1 +1,1 @@
-Init text for conflictTest
+VSCode modified text for conflictTest
