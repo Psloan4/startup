@@ -1,1 +1,1 @@
-Second modified text to conflictTest
+Init text for conflictTest
