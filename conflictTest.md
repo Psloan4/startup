@@ -1,1 +1,1 @@
-VSCode modified text for conflictTest
+Merged text for conflictTest
