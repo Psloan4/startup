@@ -1,1 +1,1 @@
-Init text for conflictTest
+Github modified text for conflictTest
