@@ -9,7 +9,7 @@ The key features of this project include:
 - seeing the stats of other users on the website
 - compare their current standing with other users around the world
 ## Rough Draft
-<img src="https://github.com/Psloan4/startup/blob/main/Project%20rough%20sketch.png" width="200">
+<img src="https://github.com/Psloan4/startup/blob/main/Project%20rough%20sketch.png" width="600">
 ## Applicable Technologies
 **HTML:** Uses standard convention for HTML, with files for login, your progress, and global standings
 **CSS:** Application will follow a minimalistic style, with good spacing between different boxes of information across the page
