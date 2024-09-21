@@ -11,3 +11,8 @@
   * Pulling synchronizes your project with the main version
 - When a merge conflict appears, you must go through using an editor and resolved the conflict, keeping necessary parts of both conflicting push requests
 - The style guide for githubs md files is available here: [Style Guide](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+
+## HTTPS - 9/21/24
+- Registering a domain name with caddy will allow you to use secure connection as opposed to http
+- To link a domain name to an ip-address, you must first buy a domain name, and then register that address so any time the domain name is input, it will redirect to the ip-address provided
+-  Using https, communication will be encrypted and decrypted automatically by caddy(?) to ensure safe requests and responses
