@@ -16,3 +16,18 @@
 - Registering a domain name with caddy will allow you to use secure connection as opposed to http
 - To link a domain name to an ip-address, you must first buy a domain name, and then register that address so any time the domain name is input, it will redirect to the ip-address provided
 -  Using https, communication will be encrypted and decrypted automatically by caddy(?) to ensure safe requests and responses
+
+## HTML - 9/21/24
+### HTML Structure
+- HTML structure is split into body, headers, footers, main, sections, and many more options
+- Dividing the page up into its respective sections is as important for design as it is for code readability
+- Theres two types of elements, block elements and inline elements. Block elements will split into their own sections, inline elements will maintain the flow of the block they are in
+- All elements must have a starting and ending cone thing
+### HTML Input
+- HTML has always had tons of input elements such as form, fieldset, labels, textareas, and more
+- Form is used for submitting data, the others are more for inputting data
+- input elements share the attributes name, disabled, value, and required
+### HTML Media Elements
+- Media elements include img, audiio, video, svg, and canvas
+- All media elements require a src or source which is a path to the URL of the media, be it relative or full path
+- audio should not autoplay typically
