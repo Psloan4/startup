@@ -31,3 +31,10 @@
 - Media elements include img, audiio, video, svg, and canvas
 - All media elements require a src or source which is a path to the URL of the media, be it relative or full path
 - audio should not autoplay typically
+### HTML in startup
+- simon.mydomain will show the example file when input, i just uploaded that by downloading the simon repository, and then running the following line to put it on the server
+```
+./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
+```
+- I have to create my html files, including holders for the database and other stuff, to give a basic layout of my startup
+- Index.html is the main html file that is ran by the server, so that is the front page
