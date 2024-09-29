@@ -38,3 +38,9 @@
 ```
 - I have to create my html files, including holders for the database and other stuff, to give a basic layout of my startup
 - Index.html is the main html file that is ran by the server, so that is the front page
+## CSS 9/28/24
+- Css is a method of controling the boarders and placement of different elements within an html document
+- you define the standard conventions for each different element, and it will apply whenever that element is used in an html document
+- it works with a cascading effect, so the effects of parents can be overwritten by children
+![image](https://github.com/Psloan4/startup/blob/main/CSS%20meme.jpg)
+- Bootstrap is commonly used like a library almost that has classes you can use which automaticly apply created css styles, such as cards, accordions, etc
