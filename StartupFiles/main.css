@@ -1,6 +1,13 @@
 * {
     font-family: "Courier New",  monospace;
-    padding: 3px;
+}
+
+#active-tab-id {
+    background-color: rgb(32, 108, 110);
+}
+
+#inactive-tab-id {
+    color: rgb(32, 108, 110);
 }
 
 html {
@@ -22,10 +29,25 @@ header {
     width: 100%;
 }
 
+h2 {
+    background-color: lightblue;
+    padding: 12px;
+    border-radius: 20px;
+    width: 500px;
+    text-align: center;
+}
+
 footer {
     background-color: lightgrey;
     text-align: right;
     padding: 15px;
+}
+
+optgroup { 
+    background-color: gray;
+}
+option, select{
+    background-color: lightgray;
 }
 
 #table-element {

@@ -1,0 +1,16 @@
+main {
+    flex: 1 calc(100vh - 110px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+}
+
+.paragraph-element {
+    width: 800px;
+    font-size: large;
+}
+
+img {
+    border-radius: 20px;
+}
