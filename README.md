@@ -18,3 +18,9 @@ The key features of this project include:
 **Service:** retrieves data of other users, retrives global data for specified exercises, and submits goals and logs
 **DB/Login:** Stores users, exercise log history, and goals
 **WebSocket:** as users update their private data, global data will be updated according, and adjusts global standings
+##HTML
+- HTML documentation will include the different webpages accessable within the startup website
+- These pages include index, login, leaderboards, and personal statistics pages
+- the login and statistics pages will include connection to a database storing the data for each user
+- a websocket connection will be plugged into the leaderboard page, in which you can select a catagory to display, and compare your inputted number with the average case in the database
+- The format is as follows: basic navigation features in the header, a main body which includes the contents of the desired page, and a footer linking to the creator (me) and my repository
