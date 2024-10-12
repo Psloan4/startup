@@ -14,3 +14,7 @@ main {
 img {
     border-radius: 20px;
 }
+
+p {
+    text-indent: 50px;
+}
