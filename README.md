@@ -24,3 +24,9 @@ The key features of this project include:
 - the login and statistics pages will include connection to a database storing the data for each user
 - a websocket connection will be plugged into the leaderboard page, in which you can select a catagory to display, and compare your inputted number with the average case in the database
 - The format is as follows: basic navigation features in the header, a main body which includes the contents of the desired page, and a footer linking to the creator (me) and my repository
+##CSS
+- There is a main.css file in the StartupFiles that controls CSS for all the overarching design
+- Seperate CSS pages exist/can be created for specific pages which need greater control over their design
+- It is designed to keep the header anchored to the top, with tabs controlling which page you are looking at
+- The contents of the main section are aligned to the center, controlled by the page size
+- Bootstrap was used for the tabs at the top of the screen, making navigation more intuitive
