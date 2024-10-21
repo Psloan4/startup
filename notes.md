@@ -1,4 +1,19 @@
 # Notes
+## Terminal
+- chmod: Changes file permissions. You can specify who can read, write, or execute a file (e.g., chmod 755 file.txt gives read, write, and execute permissions to the owner, and read and execute permissions to everyone else).
+- pwd: Prints the current working directory, showing the full path of the directory you are in.
+- cd: Changes the current directory. For example, cd /home/user/Documents will move you to the Documents directory.
+- ls: Lists the contents of a directory. Options like -l provide detailed information, and -a shows hidden files.
+- vim: Opens the vim text editor. Used to create and edit text files. It is a powerful editor with many features but has a steep learning curve.
+- nano: Opens the nano text editor. It's simpler and more user-friendly compared to vim, often used for quick file edits.
+- mkdir: Creates a new directory. For example, mkdir new_folder will create a directory named new_folder.
+- mv: Moves or renames files and directories. For example, mv file.txt /home/user/Documents moves file.txt to the specified directory, and mv oldname.txt newname.txt renames the file.
+- rm: Removes (deletes) files or directories. Be cautious, especially with the -r (recursive) and -f (force) options, as they can delete directories and their contents without confirmation.
+- man: Displays the manual page for a command. For example, man ls will show detailed information on how to use ls.
+- ssh: Opens a secure shell connection to a remote server. Used for logging in and executing commands on another machine over the network.
+- ps: Displays information about currently running processes. Options like -aux provide detailed information about all processes.
+- wget: Downloads files from the internet. For example, wget https://example.com/file.zip will download file.zip from the specified URL.
+- sudo: Executes a command with superuser (root) privileges. It is often used to run commands that require administrative rights, like installing software or modifying system files.
 
 ## Github - 9/8/24
 - The primary uses of Github are as follows:
@@ -39,51 +54,51 @@
 - I have to create my html files, including holders for the database and other stuff, to give a basic layout of my startup
 - Index.html is the main html file that is ran by the server, so that is the front page
 ## HTML Elements
-1. <html>
+1. html>
 - Represents the root of an HTML document. All other elements are nested inside it.
-2. <head>
+2. head>
 - Contains meta-information about the document, such as the title, character set, and linked stylesheets or scripts.
-3. <body>
+3. body>
 - Contains the content of the webpage that users see, including text, images, and interactive elements.
-4. <h1> to <h6>
-- Headings, ranging from <h1> (largest) to <h6> (smallest). Used for titles and section headings.
-5. <p>
+4. h1> to h6>
+- Headings, ranging from h1> (largest) to h6> (smallest). Used for titles and section headings.
+5. p>
 - Represents a paragraph of text.
-6. <br>
+6. br>
 - Inserts a line break. Unlike paragraphs, it doesn’t add extra spacing.
-7. <strong>
+7. strong>
 - Makes text bold, used to emphasize important content.
-8. <em>
+8. em>
 - Italicizes text, used for emphasis.
-9. <a>
+9. a>
 - Creates a hyperlink. Requires an href attribute to specify the URL.
 - Example: <a href="https://example.com">Link</a>
-10. <ul> and <ol>
-- <ul>: Unordered list (bulleted).
-- <ol>: Ordered list (numbered).
-- Both use <li> elements to define each list item.
-11. <li>
+10. ul> and ol>
+- ul>: Unordered list (bulleted).
+- ol>: Ordered list (numbered).
+- Both use li> elements to define each list item.
+11. li>
 - Represents a list item within <ul> or <ol> elements.
-12. <img>
+12. img>
 - Embeds an image. Requires a src attribute for the image URL and an alt attribute for alternative text.
 - Example: <img src="image.jpg" alt="Description">
-13. <div>
+13. div>
 - A generic container element used to group content. Useful for styling and layout.
-14. <span>
+14. span>
 - An inline container, often used to style or manipulate parts of text.
-15. <header> and <footer>
-- <header>: Contains introductory content or navigation links at the top of a section or page.
-- <footer>: Contains footer information, like copyrights or contact details, usually at the bottom.
-16. <nav>
+15. header> and <footer>
+- header>: Contains introductory content or navigation links at the top of a section or page.
+- footer>: Contains footer information, like copyrights or contact details, usually at the bottom.
+16. nav>
 - Represents a section of the page with navigation links.
-17. <section> and <article>
-- <section>: Groups related content, often for organizational purposes.
-- <article>: Represents a self-contained piece of content that could be distributed or reused independently.
-18. <form>
+17. section> and <article>
+- section>: Groups related content, often for organizational purposes.
+- article>: Represents a self-contained piece of content that could be distributed or reused independently.
+18. form>
 - Used to collect user input. Often includes input fields, buttons, checkboxes, and other elements.
-19. <input>
+19. input>
 - Represents a field for user input. Can be of various types, such as text, password, checkbox, radio button, etc.
-20. <button>
+20. button>
 - Creates a clickable button for user interaction.
 ## CSS 9/28/24
 - Css is a method of controling the boarders and placement of different elements within an html document
