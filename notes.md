@@ -38,6 +38,53 @@
 ```
 - I have to create my html files, including holders for the database and other stuff, to give a basic layout of my startup
 - Index.html is the main html file that is ran by the server, so that is the front page
+## HTML Elements
+1. <html>
+- Represents the root of an HTML document. All other elements are nested inside it.
+2. <head>
+- Contains meta-information about the document, such as the title, character set, and linked stylesheets or scripts.
+3. <body>
+- Contains the content of the webpage that users see, including text, images, and interactive elements.
+4. <h1> to <h6>
+- Headings, ranging from <h1> (largest) to <h6> (smallest). Used for titles and section headings.
+5. <p>
+- Represents a paragraph of text.
+6. <br>
+- Inserts a line break. Unlike paragraphs, it doesn’t add extra spacing.
+7. <strong>
+- Makes text bold, used to emphasize important content.
+8. <em>
+- Italicizes text, used for emphasis.
+9. <a>
+- Creates a hyperlink. Requires an href attribute to specify the URL.
+- Example: <a href="https://example.com">Link</a>
+10. <ul> and <ol>
+- <ul>: Unordered list (bulleted).
+- <ol>: Ordered list (numbered).
+- Both use <li> elements to define each list item.
+11. <li>
+- Represents a list item within <ul> or <ol> elements.
+12. <img>
+- Embeds an image. Requires a src attribute for the image URL and an alt attribute for alternative text.
+- Example: <img src="image.jpg" alt="Description">
+13. <div>
+- A generic container element used to group content. Useful for styling and layout.
+14. <span>
+- An inline container, often used to style or manipulate parts of text.
+15. <header> and <footer>
+- <header>: Contains introductory content or navigation links at the top of a section or page.
+- <footer>: Contains footer information, like copyrights or contact details, usually at the bottom.
+16. <nav>
+- Represents a section of the page with navigation links.
+17. <section> and <article>
+- <section>: Groups related content, often for organizational purposes.
+- <article>: Represents a self-contained piece of content that could be distributed or reused independently.
+18. <form>
+- Used to collect user input. Often includes input fields, buttons, checkboxes, and other elements.
+19. <input>
+- Represents a field for user input. Can be of various types, such as text, password, checkbox, radio button, etc.
+20. <button>
+- Creates a clickable button for user interaction.
 ## CSS 9/28/24
 - Css is a method of controling the boarders and placement of different elements within an html document
 - you define the standard conventions for each different element, and it will apply whenever that element is used in an html document
