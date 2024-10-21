@@ -78,7 +78,7 @@
 - ol>: Ordered list (numbered).
 - Both use li> elements to define each list item.
 11. li>
-- Represents a list item within <ul> or <ol> elements.
+- Represents a list item within ul> or ol> elements.
 12. img>
 - Embeds an image. Requires a src attribute for the image URL and an alt attribute for alternative text.
 - Example: <img src="image.jpg" alt="Description">
