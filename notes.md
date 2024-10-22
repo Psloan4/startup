@@ -32,6 +32,20 @@
 - To link a domain name to an ip-address, you must first buy a domain name, and then register that address so any time the domain name is input, it will redirect to the ip-address provided
 -  Using https, communication will be encrypted and decrypted automatically by caddy(?) to ensure safe requests and responses
 
+## Domains
+For the domain name banana.fruit.bozo.click, here is the breakdown:
+
+Top-Level Domain (TLD): click
+The TLD is the last part of the domain, which identifies the domain extension (like .com, .org, .net, etc.). In this case, .click is the TLD.
+
+Root Domain: bozo.click
+The root domain is the combination of the TLD and the domain name directly to the left of it. Here, bozo is the root domain's name, and .click is the TLD, making bozo.click the root domain.
+
+Subdomains: fruit and banana
+Subdomains are the parts that appear before the root domain. Here, fruit is a subdomain of bozo.click, and banana is a subdomain of fruit.bozo.click.
+
+So, banana is a subdomain of fruit, which itself is a subdomain of bozo.click.
+
 ## HTML - 9/21/24
 ### HTML Structure
 - HTML structure is split into body, headers, footers, main, sections, and many more options
