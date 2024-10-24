@@ -120,3 +120,10 @@ So, banana is a subdomain of fruit, which itself is a subdomain of bozo.click.
 - it works with a cascading effect, so the effects of parents can be overwritten by children
 ![image](https://github.com/Psloan4/startup/blob/main/CSS%20meme.jpg)
 - Bootstrap is commonly used like a library almost that has classes you can use which automaticly apply created css styles, such as cards, accordions, etc
+
+## React
+- React is used to create and modify html objects easily
+- updateState will update objects properties, but it is asynchronous, so you cannot be sure that it will update by the next line of code
+- useState returns a tuple of first a variable that can be dynamically updated (i think), and a function that is called to update that value
+- Routers are used to create a custom header object that is easily injected into all html pages, as opposed to just copying it in manually
+- You set a router path by using a NavLink element, where to="/yourObject", where yourObeject is a call of a function that returns the object or page you want
