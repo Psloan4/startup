@@ -50,9 +50,12 @@ function App() {
           <Route path='/my_stats' element={<MyStats />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
+        <footer>
+            <span>Peter Sloan</span>
+            <br />
+            <a href="https://github.com/Psloan4/startup.git">My Repository</a>
+        </footer>
       </div>
-
-
     </BrowserRouter>
 
 
