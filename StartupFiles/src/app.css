@@ -77,9 +77,21 @@ main {
     justify-content: baseline;
   }
 
-  .paragraph-element {
+.button-divider {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.paragraph-element {
     width: 800px;
     font-size: large;
+}
+
+.table-input {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
 }
 
 img {
