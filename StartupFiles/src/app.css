@@ -7,8 +7,8 @@
 }
 
 #inactive-tab-id {
-    color: rgb(199, 199, 199);
-    background-color: rgb(60, 133, 136);
+    color: rgb(32, 108, 110);
+    background-color: rgba(60, 133, 136, 0);
 }
 
 html {
