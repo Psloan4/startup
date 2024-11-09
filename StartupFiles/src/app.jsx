@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 function App() {
@@ -10,30 +11,31 @@ function App() {
       <header>
           <nav>
             <div>
-              Simon<sup>&reg;</sup>
+              <h1>Fitness Tracker Startup</h1>
             </div>
-            <menu className='navbar-nav'>
-              <li className='nav-item'>
-                <NavLink className='nav-link' to=''>
-                  Home
-                </NavLink>
-              </li>
-                <li className='nav-item'>
-                  <NavLink className='nav-link' to=''>
+            <ul class="nav nav-pills nav-justified">
+                <li class="nav-item">
+                  <NavLink className='nav-link' to='' id="active-tab-id">
+                    Home
+                  </NavLink>
+                </li>
+                <li class="nav-item">
+                  <NavLink className='nav-link' to='' id="inactive-tab-id">
                     Login
                   </NavLink>
                 </li>
-                <li className='nav-item'>
-                  <NavLink className='nav-link' to=''>
-                    Leaderboards
+                <li class="nav-item">
+                  <NavLink className='nav-link' to='' id="inactive-tab-id">
+                    Leaderboard
+                  </NavLink>               
+                </li>
+                <li class="nav-item">
+                  <NavLink className='nav-link' to='' id="inactive-tab-id">
+                    My Stats
                   </NavLink>
                 </li>
-              <li className='nav-item'>
-                <NavLink className='nav-link' to=''>
-                  My Stats
-                </NavLink>
-              </li>
-            </menu>
+            </ul>
+            <label>Your username (displays when logged in)</label>
           </nav>
         </header>
 
