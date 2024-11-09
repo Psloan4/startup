@@ -18,7 +18,7 @@ export function Unauthenticated(props) {
     <>
       <div>
         <h2>Login or Create an Account</h2>
-        <form method="get" action="play.html">
+        <form method="get" action={loginUser}>
             <div>
               <span>Email&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Enter email" />
