@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Home } from './home/home';
 import { Login } from './login/login';
@@ -8,10 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 function App() {
-  console.log("running this line")
+  const [activeTab, setActiveTab] = useState('home');
+
   return (
     <BrowserRouter>
-      <div>
+      <div className='App-container'>
       <header>
           <nav>
             <div>
@@ -19,22 +20,42 @@ function App() {
             </div>
             <ul class="nav nav-pills nav-justified">
                 <li class="nav-item">
-                  <NavLink className='nav-link' to='home' id="active-tab-id">
+                  <NavLink
+                    to="/home"
+                    className="nav-link"
+                    id={`${activeTab === 'home' ? 'active-tab-id' : 'inactive-tab-id'}`}
+                    onClick={() => setActiveTab('home')}
+                  >
                     <b>Home</b>
                   </NavLink>
                 </li>
                 <li class="nav-item">
-                  <NavLink className='nav-link' to='login' id="inactive-tab-id">
+                  <NavLink
+                    to="/login"
+                    className="nav-link"
+                    id={`${activeTab === 'login' ? 'active-tab-id' : 'inactive-tab-id'}`}
+                    onClick={() => setActiveTab('login')}
+                  >
                     <b>Login</b>
                   </NavLink>
                 </li>
                 <li class="nav-item">
-                  <NavLink className='nav-link' to='leaderboard' id="inactive-tab-id">
+                  <NavLink
+                    to="/leaderboard"
+                    className="nav-link"
+                    id={`${activeTab === 'leaderboard' ? 'active-tab-id' : 'inactive-tab-id'}`}
+                    onClick={() => setActiveTab('leaderboard')}
+                  >
                     <b>LeaderBoard</b>
                   </NavLink>               
                 </li>
                 <li class="nav-item">
-                  <NavLink className='nav-link' to='my_stats' id="inactive-tab-id">
+                  <NavLink
+                    to="/my_stats"
+                    className="nav-link"
+                    id={`${activeTab === 'my_stats' ? 'active-tab-id' : 'inactive-tab-id'}`}
+                    onClick={() => setActiveTab('my_stats')}
+                  >
                     <b>My Stats</b>
                   </NavLink>
                 </li>
