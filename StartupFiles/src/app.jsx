@@ -4,11 +4,15 @@ import { Home } from './home/home';
 import { Login } from './login/login';
 import { LeaderBoard } from './leaderboard/leaderboard';
 import { MyStats } from './my_stats/my_stats';
+import { AuthState } from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 function App() {
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const [activeTab, setActiveTab] = useState('home');
+  const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
 
   return (
     <BrowserRouter>
@@ -18,8 +22,8 @@ function App() {
             <div>
               <h1>Fitness Tracker Startup</h1>
             </div>
-            <ul class="nav nav-pills nav-justified">
-                <li class="nav-item">
+            <ul className="nav nav-pills nav-justified">
+                <li className="nav-item">
                   <NavLink
                     to="/home"
                     className="nav-link"
@@ -29,7 +33,7 @@ function App() {
                     <b>Home</b>
                   </NavLink>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <NavLink
                     to="/login"
                     className="nav-link"
@@ -39,7 +43,7 @@ function App() {
                     <b>Login</b>
                   </NavLink>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <NavLink
                     to="/leaderboard"
                     className="nav-link"
@@ -49,7 +53,7 @@ function App() {
                     <b>LeaderBoard</b>
                   </NavLink>               
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <NavLink
                     to="/my_stats"
                     className="nav-link"
@@ -60,14 +64,23 @@ function App() {
                   </NavLink>
                 </li>
             </ul>
-            <label>Your username (displays when logged in)</label>
+            <label>
+              {userName ? `Welcome, ${userName}!` : ""}
+            </label>
           </nav>
         </header>
 
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login 
+                userName={userName}
+                authState={authState}/>} 
+                onAuthChange={(userName, authState) => {
+                  setAuthState(authState);
+                  setUserName(userName);
+                }}
+              />
           <Route path='/leaderboard' element={<LeaderBoard />} />
           <Route path='/my_stats' element={<MyStats />} />
           <Route path='*' element={<NotFound />} />
