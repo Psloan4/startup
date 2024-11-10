@@ -36,3 +36,4 @@ The key features of this project include:
 - changed routing to now navigate using react Route componenets for more streamlined operation
 - used states to control the navigation element that should be highlighted, and the username that is displayed on login
 - added basic login logout functionality, although it is currently bare bones, as this will largely be replaced when we get to services
+testing
