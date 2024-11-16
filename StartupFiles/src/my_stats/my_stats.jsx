@@ -18,7 +18,7 @@ export function MyStats() {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Amount</th>
+                <th>Weight (lbs)</th>
               </tr>
             </thead>
             <tbody>
@@ -29,22 +29,30 @@ export function MyStats() {
             </tbody>
           </table>
           <br />
+          <input type="text" placeholder="Date"/>
+          <input type="number" min="0" placeholder="Weight"/>
+          <button>Add</button>
+          <br />
           <h3>Goals</h3>
         <table id="table-element">
-            <thead>
+          <thead>
+            <tr>
+              <th>Completion Date</th>
+              <th>Goal (lbs)</th>
+            </tr>
+          </thead>
+          <tbody>
               <tr>
-                <th>Completion Date</th>
-                <th>Goal</th>
+                  <td>Jan, 6, 3950</td>
+                  <td>200</td>
               </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Jan, 6, 3950</td>
-                    <td>200</td>
-                </tr>
-            </tbody>
-          </table>
-          <br />
+          </tbody>
+        </table>
+        <br />
+        <input type="text" placeholder="Completion Dat"/>
+        <input type="number" min="0" placeholder="Goal"/>
+        <button>Add</button>
+        <br />
       </main>
     );
 }
