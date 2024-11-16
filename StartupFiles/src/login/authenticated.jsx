@@ -3,17 +3,24 @@ import React from 'react';
 export function Authenticated(props) {
   const [userName, setUserName] = React.useState(props.userName);
 
-  async function logoutUser() {
-    localStorage.removeItem('userName');
-    props.onLogout();
+  function logout() {
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+    })
+      .catch(() => {
+        // Logout failed. Assuming offline
+      })
+      .finally(() => {
+        localStorage.removeItem('userName');
+        props.onLogout();
+      });
   }
-
 
   return (
     <>
       <div>
         <h2>Thanks for using our fitness tracker</h2>
-        <button type="submit" onClick={() => logoutUser()}>Logout</button>
+        <button type="submit" onClick={() => logout()}>Logout</button>
       </div>
     </>
   );

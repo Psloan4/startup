@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const uuid = require('uuid');
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 
@@ -102,3 +102,7 @@ function updateLeaderboard(newLeader, leaderboard) {
 
     return leaderboard;
 }
+
+app.use((_req, res) => {
+    res.sendFile('index.html', {root: 'public'})
+})

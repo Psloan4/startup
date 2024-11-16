@@ -75,12 +75,13 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/login' element={<Login 
                 userName={userName}
-                authState={authState}/>} 
+                authState={authState}
                 onAuthChange={(userName, authState) => {
                   setAuthState(authState);
                   setUserName(userName);
+                  setActiveTab('login')
                 }}
-              />
+              />} />
           <Route path='/leaderboard' element={<LeaderBoard />} />
           <Route path='/my_stats' element={<MyStats />} />
           <Route path='*' element={<NotFound />} />
