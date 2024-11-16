@@ -23,7 +23,7 @@ apiRouter.post('/auth/create', async (req, res) => {
     if (user) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
-      const user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
+      const user = { email: req.body.email, password: req.body.password, token: uuid.v4(), progress: [], goals: []};
       users[user.email] = user;
   
       res.send({ token: user.token });
@@ -51,22 +51,23 @@ apiRouter.post('/auth/create', async (req, res) => {
     res.status(204).end();
   });
 
-  apiRouter.get('/scores', (req, res) => {
+  apiRouter.get('/leaders', (req, res) => {
     res.send(leaderboards[req.body.leaderboard]);
   });
   
   // SubmitScore
-  apiRouter.post('/score', (req, res) => {
+  apiRouter.post('/progress', (req, res) => {
     const user = Object.values(users).find((u) => u.token === req.body.token);
     if (user) {
+        user.progress.push({
+            score: req.score,
+            email: req.email,
+            date: req.date,
+        })
         leaderboards = updateLeaderboard(req.body, scores);
     }
     res.status(204).end();
-    res.send({
-        score: req.score,
-        email: req.email,
-        date: req.date,
-    });
+    res.send(user.progress);
   });
 
   function updateLeaderboard(newLeaderboard, leaderboard) {
