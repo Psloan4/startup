@@ -50,7 +50,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     });
 
     // DeleteAuth logout a user
-    apiRouter.delete('/auth/logout', (req, res) => {
+apiRouter.delete('/auth/logout', (req, res) => {
     const user = Object.values(users).find((u) => u.token === req.body.token);
     if (user) {
         delete user.token;
@@ -74,12 +74,31 @@ apiRouter.post('/progress', (req, res) => {
             email: user.email,
             date: req.body.date,
         }
-        user.progress.push(newLeaderboard)
+        let newProgress = {
+            score: req.body.score,
+            date: req.body.date,
+        }
+        user.progress.push(newProgress)
         leaderboards[req.lift_type] = updateLeaderboard(newLeaderboard, leaderboards[req.body.lift_type]);
     }
     console.log(user.progress)
     let progress_report = user.progress
     res.status(204).send(progress_report);
+});
+
+apiRouter.post('/goals', (req, res) => {
+    console.log("in goals")
+    const user = Object.values(users).find((u) => u.token === req.body.token);
+    if (user) {
+        let newGoal = {
+            goal: req.body.goal,
+            date: req.body.date,
+        }
+        user.goals.push(newGoal)
+    }
+    console.log(user.goals)
+    let goal_report = user.goals
+    res.status(204).send(goal_report);
 });
 
 function updateLeaderboard(newLeader, leaderboard) {
