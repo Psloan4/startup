@@ -66,7 +66,7 @@ apiRouter.get('/leaders', (req, res) => {
 
 // SubmitScore
 apiRouter.post('/progress', (req, res) => {
-    console.log("in progress")
+    console.log("in progress: ")
     const user = Object.values(users).find((u) => u.token === req.body.token);
     if (user) {
         let newLeaderboard = {

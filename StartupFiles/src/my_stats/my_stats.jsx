@@ -9,6 +9,7 @@ export function MyStats() {
     const [progressScore, setProgressScore] = useState("");
     const [goalDate, setGoalDate] = useState("");
     const [goalScore, setGoalScore] = useState("");
+    const [progressEntries, setProgressEntries] = useState([]); // State to store progress entries
 
     const handleSelectChange = (event) => {
       const newValue = event.target.value;
@@ -25,10 +26,12 @@ export function MyStats() {
           body: JSON.stringify({ /* Add the data you want to send */ }),
       })
       .then((data) => {
-          console.log('Response data:', data); // Process the data
-          let date = data.progress_date
-          let score = data.progress_score
+        setProgressEntries((prevEntries) => [
+          ...prevEntries,
+          { date: data.date, weight: data.weight },
+      ]);
       })
+    }
 
     function submitGoals() {
 
@@ -53,16 +56,18 @@ export function MyStats() {
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Jan, 6, 2150</td>
-                    <td>200</td>
+              {progressEntries.map((entry, index) => (
+                <tr key={index}>
+                  <td>{entry.date}</td>
+                  <td>{entry.weight}</td>
                 </tr>
+              ))}
             </tbody>
           </table>
           <br />
           <input type="text" placeholder="Date" onChange={(e) => setProgressDate(e.target.value)} />
           <input type="number" min="0" placeholder="Weight" onChange={(e) => setProgressScore(e.target.value)} />
-          <button>Add</button>
+          <button onClick={submitProgress}>Add</button>
           <br />
           <h3>Goals</h3>
         <table id="table-element">
@@ -86,4 +91,4 @@ export function MyStats() {
         <br />
       </main>
     );
-}
+  }
