@@ -18,9 +18,10 @@ export function MyStats() {
     };
 
     function submitProgress() {
+      const token = localStorage.getItem('token');
       fetch(`/api/progress`, {
         method: 'post',
-        body: JSON.stringify({ score: progressScore, date: progressDate, lift_type: selection}),
+        body: JSON.stringify({ token: token, score: progressScore, date: progressDate, lift_type: selection}),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },

@@ -23,14 +23,15 @@ app.listen(port, () => {
 });
 
 apiRouter.post('/auth/create', async (req, res) => {
+    console.log("creating user")
     const user = users[req.body.email];
     if (user) {
         res.status(409).send({ msg: 'Existing user' });
     } else {
         const user = { email: req.body.email, password: req.body.password, token: uuid.v4(), progress: [], goals: []};
         users[user.email] = user;
-
-        res.send({ token: user.token });
+        console.log("successfully created user")
+        res.status(200).send({ token: user.token });
     }
 });
 
@@ -40,7 +41,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     if (user) {
         if (req.body.password === user.password) {
         user.token = uuid.v4();
-        res.send({ token: user.token });
+        res.status(200).send({ token: user.token });
         console.log(users)
         return;
         }
@@ -67,6 +68,7 @@ apiRouter.get('/leaders', (req, res) => {
 // SubmitScore
 apiRouter.post('/progress', (req, res) => {
     console.log("in progress: ")
+    console.log("token = ", req.body.token)
     const user = Object.values(users).find((u) => u.token === req.body.token);
     console.log("got user")
     if (user) {

@@ -13,20 +13,43 @@ export function Unauthenticated(props) {
   }
 
   async function loginOrCreate(endpoint) {
-    const response = await fetch(endpoint, {
-      method: 'post',
-      body: JSON.stringify({ email: userName, password: password }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    });
-    if (response?.status === 200) {
-      localStorage.setItem('userName', userName);
-      props.onLogin(userName);
-    } else {
-      const body = await response.json();
-      setDisplayError(`⚠ Error: ${body.msg}`);
-    }
+    console.log("attempting to create user")
+
+      const response = await fetch(endpoint, {
+        method: 'post',
+        body: JSON.stringify({ email: userName, password: password }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+      if (response?.status === 200) {
+        console.log("got positive response")
+        localStorage.setItem('userName', userName);
+        localStorage.setItem('token', response.token);
+        props.onLogin(userName);
+      } else {
+        const body = await response.json();
+        setDisplayError(`⚠ Error: ${body.msg}`);
+      }
+    // const response = await fetch(endpoint, {
+    //   method: 'post',
+    //   body: JSON.stringify({ email: userName, password: password }),
+    //   headers: {
+    //     'Content-type': 'application/json; charset=UTF-8',
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log("got response from login or create")
+    //     if (response.status === 200) {
+    //       console.log(response)
+    //       localStorage.setItem('token', response.token);
+    //       localStorage.setItem('userName', userName);
+    //       props.onLogin(userName);
+    //     } else {
+    //       const body = response.json();
+    //       setDisplayError(`⚠ Error: ${body.msg}`);
+    //     }
+    // })
   }
 
   return (
