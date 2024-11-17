@@ -18,12 +18,12 @@ export function MyStats() {
     };
 
     function submitProgress() {
-      fetch(`/api/auth/progress`, {
-          method: 'POST', // Use uppercase for HTTP methods
-          headers: {
-              'Content-Type': 'application/json', // Specify the content type
-          },
-          body: JSON.stringify({ /* Add the data you want to send */ }),
+      fetch(`/api/progress`, {
+        method: 'post',
+        body: JSON.stringify({ score: progressScore, date: progressDate, lift_type: selection}),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
       })
       .then((data) => {
         setProgressEntries((prevEntries) => [

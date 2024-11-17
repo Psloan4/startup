@@ -68,6 +68,7 @@ apiRouter.get('/leaders', (req, res) => {
 apiRouter.post('/progress', (req, res) => {
     console.log("in progress: ")
     const user = Object.values(users).find((u) => u.token === req.body.token);
+    console.log("got user")
     if (user) {
         let newLeaderboard = {
             score: req.body.score,
@@ -78,12 +79,13 @@ apiRouter.post('/progress', (req, res) => {
             score: req.body.score,
             date: req.body.date,
         }
+        console.log("created objects")
         user.progress.push(newProgress)
-        leaderboards[req.lift_type] = updateLeaderboard(newLeaderboard, leaderboards[req.body.lift_type]);
+        leaderboards[req.body.lift_type] = updateLeaderboard(newLeaderboard, leaderboards[req.body.lift_type]);
+        console.log(user.progress)
+        let progress_report = user.progress
+        res.status(204).send(progress_report);
     }
-    console.log(user.progress)
-    let progress_report = user.progress
-    res.status(204).send(progress_report);
 });
 
 apiRouter.post('/goals', (req, res) => {
