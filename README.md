@@ -36,3 +36,9 @@ The key features of this project include:
 - changed routing to now navigate using react Route componenets for more streamlined operation
 - used states to control the navigation element that should be highlighted, and the username that is displayed on login
 - added basic login logout functionality, although it is currently bare bones, as this will largely be replaced when we get to services
+##Service
+- In this version, I implemented a service in the file index.js
+- The service currently contains all the working backend for logging in a user, creating a user, and signing out a user. Frameworks have been built for saving different goals and progress.
+- The front end is connected for the login functionality
+- Additionally, the home screen also is connected to an API which will get a random inspiriational quote for the user.
+- all of this is implemented using express
