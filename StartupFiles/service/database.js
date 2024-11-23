@@ -8,4 +8,4 @@ const client = new MongoClient(url);
 const db = client.db('startup');
 
 const userCollection = db.collection('user');
-const scoreCollection = db.collection('leaderboards');
+const leaderboardCollection = db.collection('leaderboards');
