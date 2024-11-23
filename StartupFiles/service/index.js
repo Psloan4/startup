@@ -1,5 +1,9 @@
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
+const authCookieName = 'token';
 
 const uuid = require('uuid');
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -9,7 +13,10 @@ app.use(express.json());
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+app.use(express.json());
+app.use(cookieParser());
 app.use(express.static('public'));
+app.set('trust proxy', true);
 
 let users = {};
 let leaderboards = {
@@ -24,15 +31,29 @@ app.listen(port, () => {
 
 apiRouter.post('/auth/create', async (req, res) => {
     console.log("creating user")
-    const user = users[req.body.email];
-    if (user) {
-        res.status(409).send({ msg: 'Existing user' });
-    } else {
-        const user = { email: req.body.email, password: req.body.password, token: uuid.v4(), progress: [], goals: []};
-        users[user.email] = user;
-        console.log("successfully created user")
-        res.status(200).send({ token: user.token });
-    }
+    apiRouter.post('/auth/create', async (req, res) => {
+        if (await DB.getUser(req.body.email)) {
+          res.status(409).send({ msg: 'Existing user' });
+        } else {
+          const user = await DB.createUser(req.body.email, req.body.password);
+      
+          // Set the cookie
+          setAuthCookie(res, user.token);
+      
+          res.send({
+            id: user._id,
+          });
+        }
+      });
+    // const user = users[req.body.email];
+    // if (user) {
+    //     res.status(409).send({ msg: 'Existing user' });
+    // } else {
+    //     const user = { email: req.body.email, password: req.body.password, token: uuid.v4(), progress: [], goals: []};
+    //     users[user.email] = user;
+    //     console.log("successfully created user")
+    //     res.status(200).send({ token: user.token });
+    // }
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
@@ -129,3 +150,11 @@ function updateLeaderboard(newLeader, leaderboard) {
 app.use((_req, res) => {
     res.sendFile('index.html', {root: 'public'})
 })
+
+function setAuthCookie(res, authToken) {
+    res.cookie(authCookieName, authToken, {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+  }

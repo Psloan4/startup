@@ -20,6 +20,14 @@ const deadliftLeaderboardCollection = db.collection('deadliftLeaderboards');
     process.exit(1);
   });
 
+  function getUser(email) {
+    return userCollection.findOne({ email: email });
+  }
+  
+  function getUserByToken(token) {
+    return userCollection.findOne({ token: token });
+  }
+
   async function createUser(email, password) {
     // Hash the password before we insert it into the database
     const passwordHash = await bcrypt.hash(password, 10);
@@ -28,11 +36,33 @@ const deadliftLeaderboardCollection = db.collection('deadliftLeaderboards');
       email: email,
       password: passwordHash,
       token: uuid.v4(),
+      progress: [],
+      goals: [],
     };
     await userCollection.insertOne(user);
-  
     return user;
   }
+
+  async function addItemToArray(authToken, arrayName, newItem) {
+    try {
+      // Dynamic update using arrayName
+      const result = await userCollection.updateOne(
+        { token: authToken }, // Filter by authToken
+        { $push: { [arrayName]: newItem } } // Dynamically set the array to update
+      );
+  
+      // Check if a user was updated
+      if (result.modifiedCount === 0) {
+        return { success: false, message: "User not found or no changes made." };
+      }
+  
+      return { success: true, message: `Item added to ${arrayName} successfully.` };
+    } catch (error) {
+      console.error(`Error adding item to ${arrayName}:`, error);
+      return { success: false, message: "An error occurred." };
+    }
+  }
+  
 
   async function addSquatLeaderboard(score) {
     return squatLeaderboardCollection.insertOne(score);
@@ -45,7 +75,7 @@ const deadliftLeaderboardCollection = db.collection('deadliftLeaderboards');
   async function addDeadliftLeaderboard(score) {
     return deadliftLeaderboardCollection.insertOne(score);
   }
-  
+
   function getSquatLeaderboard() {
     const cursor = squatLeaderboardCollection.find(); // No query, no options
     return cursor.toArray(); // Converts the cursor to an array of documents
