@@ -20,73 +20,74 @@ const deadliftLeaderboardCollection = db.collection('deadliftLeaderboards');
     process.exit(1);
   });
 
-  function getUser(email) {
-    return userCollection.findOne({ email: email });
-  }
-  
-  function getUserByToken(token) {
-    return userCollection.findOne({ token: token });
-  }
+function getUser(email) {
+return userCollection.findOne({ email: email });
+}
 
-  async function createUser(email, password) {
-    // Hash the password before we insert it into the database
-    const passwordHash = await bcrypt.hash(password, 10);
-  
-    const user = {
-      email: email,
-      password: passwordHash,
-      token: uuid.v4(),
-      progress: [],
-      goals: [],
-    };
-    await userCollection.insertOne(user);
-    return user;
-  }
+function getUserByToken(token) {
+return userCollection.findOne({ token: token });
+}
 
-  async function addItemToArray(authToken, arrayName, newItem) {
-    try {
-      // Dynamic update using arrayName
-      const result = await userCollection.updateOne(
-        { token: authToken }, // Filter by authToken
-        { $push: { [arrayName]: newItem } } // Dynamically set the array to update
-      );
-  
-      // Check if a user was updated
-      if (result.modifiedCount === 0) {
-        return { success: false, message: "User not found or no changes made." };
-      }
-  
-      return { success: true, message: `Item added to ${arrayName} successfully.` };
-    } catch (error) {
-      console.error(`Error adding item to ${arrayName}:`, error);
-      return { success: false, message: "An error occurred." };
+async function createUser(email, password) {
+// Hash the password before we insert it into the database
+console.log("in database create user")
+const passwordHash = await bcrypt.hash(password, 10);
+const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+    progress: [],
+    goals: [],
+};
+await userCollection.insertOne(user);
+console.log("Successfully created user")
+return user;
+}
+
+async function addItemToArray(authToken, arrayName, newItem) {
+try {
+    // Dynamic update using arrayName
+    const result = await userCollection.updateOne(
+    { token: authToken }, // Filter by authToken
+    { $push: { [arrayName]: newItem } } // Dynamically set the array to update
+    );
+
+    // Check if a user was updated
+    if (result.modifiedCount === 0) {
+    return { success: false, message: "User not found or no changes made." };
     }
-  }
-  
 
-  async function addSquatLeaderboard(score) {
-    return squatLeaderboardCollection.insertOne(score);
-  }
-  
-  async function addBenchLeaderboard(score) {
-    return benchLeaderboardCollection.insertOne(score);
-  }
+    return { success: true, message: `Item added to ${arrayName} successfully.` };
+} catch (error) {
+    console.error(`Error adding item to ${arrayName}:`, error);
+    return { success: false, message: "An error occurred." };
+}
+}
 
-  async function addDeadliftLeaderboard(score) {
-    return deadliftLeaderboardCollection.insertOne(score);
-  }
 
-  function getSquatLeaderboard() {
-    const cursor = squatLeaderboardCollection.find(); // No query, no options
-    return cursor.toArray(); // Converts the cursor to an array of documents
-  }
+async function addSquatLeaderboard(score) {
+return squatLeaderboardCollection.insertOne(score);
+}
 
-  function getBenchLeaderboard() {
-    const cursor = benchLeaderboardCollection.find(); // No query, no options
-    return cursor.toArray(); // Converts the cursor to an array of documents
-  }
-  
-  function getDeadliftLeaderboard() {
-    const cursor = deadliftLeaderboardCollection.find(); // No query, no options
-    return cursor.toArray(); // Converts the cursor to an array of documents
-  }
+async function addBenchLeaderboard(score) {
+return benchLeaderboardCollection.insertOne(score);
+}
+
+async function addDeadliftLeaderboard(score) {
+return deadliftLeaderboardCollection.insertOne(score);
+}
+
+function getSquatLeaderboard() {
+const cursor = squatLeaderboardCollection.find(); // No query, no options
+return cursor.toArray(); // Converts the cursor to an array of documents
+}
+
+function getBenchLeaderboard() {
+const cursor = benchLeaderboardCollection.find(); // No query, no options
+return cursor.toArray(); // Converts the cursor to an array of documents
+}
+
+function getDeadliftLeaderboard() {
+const cursor = deadliftLeaderboardCollection.find(); // No query, no options
+return cursor.toArray(); // Converts the cursor to an array of documents
+}

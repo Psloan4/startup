@@ -30,7 +30,7 @@ app.listen(port, () => {
 });
 
 apiRouter.post('/auth/create', async (req, res) => {
-    console.log("creating user")
+    console.log("creating user: ", req.body.email)
     apiRouter.post('/auth/create', async (req, res) => {
         if (await DB.getUser(req.body.email)) {
           res.status(409).send({ msg: 'Existing user' });
