@@ -20,7 +20,11 @@ export function Authenticated(props) {
     <>
       <div>
         <h2>Thanks for using our fitness tracker</h2>
-        <button type="submit" onClick={() => logout()}>Logout</button>
+        <br />
+        <div className="button-divider">
+          <button type="submit" onClick={() => logout()}>Logout</button>
+        </div>
+        
       </div>
     </>
   );

@@ -2,8 +2,9 @@ import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../app.css';
 import { useState, useEffect } from 'react';
+import { AuthState } from '../login/authState';
 
-export function MyStats() {
+export function MyStats({authState}) {
     const [selection, setSelection] = useState("Squat"); // Initialize state with the default value
     const [progressDate, setProgressDate] = useState("");
     const [progressScore, setProgressScore] = useState("");
@@ -13,8 +14,9 @@ export function MyStats() {
     const [goalEnttries, setGoalEntries] = useState([]); // State to store progress entries
 
     useEffect(getProgress, []);
-
     useEffect(getGoals, []);
+
+    console.log("authstate ", authState)
 
     const handleSelectChange = (event) => {
       const newValue = event.target.value;
@@ -25,6 +27,7 @@ export function MyStats() {
     };
 
     function getProgress(liftType) {
+      if (authState != AuthState.Authenticated) {return}
       if (!liftType) {
         liftType = 'squat'
       }
@@ -52,6 +55,7 @@ export function MyStats() {
     }
 
     function getGoals(liftType) {
+      if (authState != AuthState.Authenticated) {return}
       if (!liftType) {
         liftType = 'squat'
       }
@@ -122,57 +126,69 @@ export function MyStats() {
     return (
       <main>
         <h2>My Stats</h2>
-        <span>Enter a category: </span>
-        <select value={selection} onChange={handleSelectChange}>
-          <option>Squat</option>
-          <option>Bench</option>
-          <option>Deadlift</option>
-        </select>
-        <br />
-        <h3>Progress</h3>
-        <table id="table-element">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Weight (lbs)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {progressEntries.map((entry, index) => (
-                <tr key={index}>
-                  <td id='table-element'>{entry.date}</td>
-                  <td id='table-element'>{entry.score}</td>
+        <span>{authState === AuthState.Authenticated ? "Enter a category: " : "Log in to see your stats"}</span>
+        {authState === AuthState.Authenticated && (
+          <>
+            <select value={selection} onChange={handleSelectChange}>
+              <option>Squat</option>
+              <option>Bench</option>
+              <option>Deadlift</option>
+            </select>
+            <br />
+
+            <h3>Progress</h3>
+            <table id="table-element">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Weight (lbs)</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <br />
-          <input type="text" placeholder="Date" onChange={(e) => setProgressDate(e.target.value)} />
-          <input type="number" min="0" placeholder="Weight" onChange={(e) => setProgressScore(e.target.value)} />
-          <button onClick={submitProgress}>Add</button>
-          <br />
-          <h3>Goals</h3>
-        <table id="table-element">
-          <thead>
-            <tr>
-              <th>Completion Date</th>
-              <th>Goal (lbs)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {goalEnttries.map((entry, index) => (
-              <tr key={index}>
-                <td id='table-element'>{entry.date}</td>
-                <td id='table-element'>{entry.goal}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <br />
-        <input type="text" placeholder="Completion Date" onChange={(e) => setGoalDate(e.target.value)} />
-        <input type="number" min="0" placeholder="Goal" onChange={(e) => setGoalScore(e.target.value)} />
-        <button onClick={submitGoals}>Add</button>
-        <br />
+              </thead>
+              <tbody>
+                {progressEntries.map((entry, index) => (
+                  <tr key={index}>
+                    <td id='table-element'>{entry.date}</td>
+                    <td id='table-element'>{entry.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <br />
+            <input type="text" placeholder="Date" onChange={(e) => setProgressDate(e.target.value)} />
+            <input type="number" min="0" placeholder="Weight" onChange={(e) => setProgressScore(e.target.value)} />
+            <button onClick={submitProgress} disabled={!progressDate || !progressEntries}>
+              Add
+            </button>
+            <br />
+
+            <h3>Goals</h3>
+            <table id="table-element">
+              <thead>
+                <tr>
+                  <th>Completion Date</th>
+                  <th>Goal (lbs)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {goalEnttries.map((entry, index) => (
+                  <tr key={index}>
+                    <td id='table-element'>{entry.date}</td>
+                    <td id='table-element'>{entry.goal}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <br />
+            <input type="text" placeholder="Completion Date" onChange={(e) => setGoalDate(e.target.value)} />
+            <input type="number" min="0" placeholder="Goal" onChange={(e) => setGoalScore(e.target.value)} />
+            <button onClick={submitGoals} disabled={!goalDate || !goalEnttries}>
+              Add
+            </button>
+            <br />
+          </>
+        )}
       </main>
     );
   }

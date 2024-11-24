@@ -83,7 +83,7 @@ function App() {
                 }}
               />} />
           <Route path='/leaderboard' element={<LeaderBoard />} />
-          <Route path='/my_stats' element={<MyStats />} />
+          <Route path='/my_stats' element={<MyStats authState={authState}/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <footer>
