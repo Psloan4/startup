@@ -31,29 +31,19 @@ app.listen(port, () => {
 
 apiRouter.post('/auth/create', async (req, res) => {
     console.log("creating user: ", req.body.email)
-    apiRouter.post('/auth/create', async (req, res) => {
-        if (await DB.getUser(req.body.email)) {
-          res.status(409).send({ msg: 'Existing user' });
-        } else {
-          const user = await DB.createUser(req.body.email, req.body.password);
-      
-          // Set the cookie
-          setAuthCookie(res, user.token);
-      
-          res.send({
-            id: user._id,
-          });
-        }
-      });
-    // const user = users[req.body.email];
-    // if (user) {
-    //     res.status(409).send({ msg: 'Existing user' });
-    // } else {
-    //     const user = { email: req.body.email, password: req.body.password, token: uuid.v4(), progress: [], goals: []};
-    //     users[user.email] = user;
-    //     console.log("successfully created user")
-    //     res.status(200).send({ token: user.token });
-    // }
+    if (await DB.getUser(req.body.email)) {
+        res.status(409).send({ msg: 'Existing user' });
+    } else {
+        console.log("got here")
+        const user = await DB.createUser(req.body.email, req.body.password);
+    
+        // Set the cookie
+        setAuthCookie(res, user.token);
+    
+        res.send({
+        id: user._id,
+        });
+    }
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
