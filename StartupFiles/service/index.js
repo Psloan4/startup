@@ -71,9 +71,11 @@ apiRouter.get('/leaders', (req, res) => {
 
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
+secureApiRouter.use(cookieParser());
+
 
 secureApiRouter.use(async (req, res, next) => {
-    console.log("cookies: ", req.cookies)
+    console.log("request path: ", req.path)
     const authToken = req.cookies[authCookieName];
     const user = await DB.getUserByToken(authToken);
     if (user) {
@@ -83,28 +85,41 @@ secureApiRouter.use(async (req, res, next) => {
     }
 });
 
-secureApiRouter.post('/progress', (req, res) => {
+secureApiRouter.post('/progress', async (req, res) => {
     console.log("in progress: ")
-    console.log("token = ", req.body.token)
-    const user = Object.values(users).find((u) => u.token === req.body.token);
-    console.log("got user")
-    if (user) {
-        let newLeaderboard = {
-            score: req.body.score,
-            email: user.email,
-            date: req.body.date,
-        }
-        let newProgress = {
-            score: req.body.score,
-            date: req.body.date,
-        }
-        console.log("created objects")
-        user.progress.push(newProgress)
-        leaderboards[req.body.lift_type] = updateLeaderboard(newLeaderboard, leaderboards[req.body.lift_type]);
-        console.log(user.progress)
-        let progress_report = user.progress
-        res.status(204).send(progress_report);
+    const authToken = req.cookies[authCookieName];
+    let newProgress = {
+        score: req.body.score,
+        date: req.body.date,
     }
+    await DB.addItemToArray(authToken, 'progress', req.body.liftType, newProgress)
+    const user = await DB.getUserByToken(authToken)
+    let returnProgress = user.progress.squat
+    if (req.body.liftType == "bench") {
+        returnProgress = user.progress.bench
+    } else if (req.body.liftType == "deadlift") {
+        returnProgress = user.progress.deadlift
+    }  
+    res.status(200).send({ progress: returnProgress });
+    // console.log("token = ", req.body.token)
+    // const user = Object.values(users).find((u) => u.token === req.body.token);
+    // console.log("got user")
+    // if (user) {
+    //     let newLeaderboard = {
+    //         score: req.body.score,
+    //         email: user.email,
+    //         date: req.body.date,
+    //     }
+    //     let newProgress = {
+    //         score: req.body.score,
+    //         date: req.body.date,
+    //     }
+    //     console.log("created objects")
+    //     user.progress.push(newProgress)
+    //     leaderboards[req.body.lift_type] = updateLeaderboard(newLeaderboard, leaderboards[req.body.lift_type]);
+    //     console.log(user.progress)
+    //     let progress_report = user.progress
+    //     res.status(204).send(progress_report);
 });
 
 secureApiRouter.post('/goals', async (req, res) => {
@@ -114,7 +129,15 @@ secureApiRouter.post('/goals', async (req, res) => {
         goal: req.body.goal,
         date: req.body.date,
     }
-    DB.addItemToArray(authToken, 'goals', newGoal)
+    await DB.addItemToArray(authToken, 'goals', req.body.liftType, newGoal)
+    const user = await DB.getUserByToken(authToken)
+    let returnGoals = user.goals.squat
+    if (req.body.liftType == "bench") {
+        returnGoals = user.goals.bench
+    } else if (req.body.liftType == "deadlift") {
+        returnGoals = user.goals.deadlift
+    } 
+    res.status(200).send({ goals: returnGoals});
     // const user = Object.values(users).find((u) => u.token === req.body.token);
     // if (user) {
     //     let newGoal = {
@@ -127,6 +150,39 @@ secureApiRouter.post('/goals', async (req, res) => {
     // let goal_report = user.goals
     // res.status(204).send(goal_report);
 });
+
+secureApiRouter.get('/goals/squat', async (req, res) => {
+
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken)
+    res.status(200).send({ goals: user.goals.squat});
+})
+secureApiRouter.get('/goals/bench', async (req, res) => {
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken)
+    res.status(200).send({ goals: user.goals.bench});
+})
+secureApiRouter.get('/goals/deadlift', async (req, res) => {
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken)
+    res.status(200).send({ goals: user.goals.deadlift});
+})
+
+secureApiRouter.get('/progress/squat', async (req, res) => {
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken)
+    res.status(200).send({ progress: user.progress.squat});
+})
+secureApiRouter.get('/progress/bench', async (req, res) => {
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken)
+    res.status(200).send({ progress: user.progress.bench});
+})
+secureApiRouter.get('/progress/deadlift', async (req, res) => {
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken)
+    res.status(200).send({ progress: user.progress.deadlift});
+})
 
 function updateLeaderboard(newLeader, leaderboard) {
     let found = false;
@@ -164,7 +220,3 @@ function setAuthCookie(res, authToken) {
       sameSite: 'strict',
     });
 }
-
-const httpService = app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});

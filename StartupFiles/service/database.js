@@ -37,20 +37,29 @@ async function createUser(email, password) {
         email: email,
         password: passwordHash,
         token: uuid.v4(),
-        progress: [],
-        goals: [],
+        progress: {
+            squat: [],
+            bench: [],
+            deadlift: [],
+        },
+        goals: {
+            squat: [],
+            bench: [],
+            deadlift: [],
+        },
     };
     await userCollection.insertOne(user);
     console.log("Successfully created user")
     return user;
 }
 
-async function addItemToArray(authToken, arrayName, newItem) {
+async function addItemToArray(authToken, arrayName, liftType, newItem) {
     try {
+        const fieldPath = `${arrayName}.${liftType}`;
         // Dynamic update using arrayName
         const result = await userCollection.updateOne(
         { token: authToken }, // Filter by authToken
-        { $push: { [arrayName]: newItem } } // Dynamically set the array to update
+        { $push: { [fieldPath]: newItem } } // Dynamically set the array to update
         );
 
         // Check if a user was updated
