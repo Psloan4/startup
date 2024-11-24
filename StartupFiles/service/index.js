@@ -47,27 +47,20 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-    console.log("in login")
-    const user = users[req.body.email];
+    const user = await DB.getUser(req.body.email);
     if (user) {
-        if (req.body.password === user.password) {
-        user.token = uuid.v4();
-        res.status(200).send({ token: user.token });
-        console.log(users)
+        if (await bcrypt.compare(req.body.password, user.password)) {
+        setAuthCookie(res, user.token);
+        res.send({ id: user._id });
         return;
         }
     }
-    console.log(users)
     res.status(401).send({ msg: 'Unauthorized' });
-    });
+});
 
     // DeleteAuth logout a user
-apiRouter.delete('/auth/logout', (req, res) => {
-    const user = Object.values(users).find((u) => u.token === req.body.token);
-    if (user) {
-        delete user.token;
-    }
-    console.log(users)
+apiRouter.delete('/auth/logout', (_req, res) => {
+    res.clearCookie(authCookieName);
     res.status(204).end();
 });
 
@@ -76,8 +69,21 @@ apiRouter.get('/leaders', (req, res) => {
     res.send(leaderboards[req.body.leaderboard]);
 });
 
-// SubmitScore
-apiRouter.post('/progress', (req, res) => {
+const secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
+
+secureApiRouter.use(async (req, res, next) => {
+    console.log("cookies: ", req.cookies)
+    const authToken = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(authToken);
+    if (user) {
+      next();
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+});
+
+secureApiRouter.post('/progress', (req, res) => {
     console.log("in progress: ")
     console.log("token = ", req.body.token)
     const user = Object.values(users).find((u) => u.token === req.body.token);
@@ -101,19 +107,25 @@ apiRouter.post('/progress', (req, res) => {
     }
 });
 
-apiRouter.post('/goals', (req, res) => {
+secureApiRouter.post('/goals', async (req, res) => {
     console.log("in goals")
-    const user = Object.values(users).find((u) => u.token === req.body.token);
-    if (user) {
-        let newGoal = {
-            goal: req.body.goal,
-            date: req.body.date,
-        }
-        user.goals.push(newGoal)
+    const authToken = req.cookies[authCookieName];
+    let newGoal = {
+        goal: req.body.goal,
+        date: req.body.date,
     }
-    console.log(user.goals)
-    let goal_report = user.goals
-    res.status(204).send(goal_report);
+    DB.addItemToArray(authToken, 'goals', newGoal)
+    // const user = Object.values(users).find((u) => u.token === req.body.token);
+    // if (user) {
+    //     let newGoal = {
+    //         goal: req.body.goal,
+    //         date: req.body.date,
+    //     }
+    //     user.goals.push(newGoal)
+    // }
+    // console.log(user.goals)
+    // let goal_report = user.goals
+    // res.status(204).send(goal_report);
 });
 
 function updateLeaderboard(newLeader, leaderboard) {
@@ -137,6 +149,10 @@ function updateLeaderboard(newLeader, leaderboard) {
     return leaderboard;
 }
 
+app.use(function (err, req, res, next) {
+    res.status(500).send({ type: err.name, message: err.message });
+});
+
 app.use((_req, res) => {
     res.sendFile('index.html', {root: 'public'})
 })
@@ -147,4 +163,8 @@ function setAuthCookie(res, authToken) {
       httpOnly: true,
       sameSite: 'strict',
     });
-  }
+}
+
+const httpService = app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});

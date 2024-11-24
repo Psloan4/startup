@@ -62,7 +62,7 @@ export function Unauthenticated(props) {
             e.preventDefault(); // Prevent the form's default submit action
           }}
         >
-          <div>
+          <div className="button-divider">
             <span>Email&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <input
               type="text"
@@ -71,7 +71,7 @@ export function Unauthenticated(props) {
               placeholder="Enter email"
             />
           </div>
-          <div>
+          <div className="button-divider">
             <span>Password&nbsp;</span>
             <input
               type="password"

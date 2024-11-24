@@ -97,4 +97,11 @@ module.exports = {
     getUser,
     getUserByToken,
     createUser,
+    addItemToArray,
+    addSquatLeaderboard,
+    addBenchLeaderboard,
+    addDeadliftLeaderboard,
+    getSquatLeaderboard,
+    getBenchLeaderboard,
+    getDeadliftLeaderboard,
   };
