@@ -42,3 +42,9 @@ The key features of this project include:
 - The front end is connected for the login functionality
 - Additionally, the home screen also is connected to an API which will get a random inspiriational quote for the user.
 - all of this is implemented using express
+##Startup
+- Got my service connected to a new file database.js. It connects to mongodb, and is able to create and login new users, and manages the users progress scores and goals
+- Added authentication using cookies, so the token is stored as a cookie and is used to access certain features available to those who have signed in
+- Created a secure API that associates the user with an authentication token, in order to manage things like updated user progress and goals
+- Updated the frontend to more clearly reflect whether or not the user has been logged in
+- 
