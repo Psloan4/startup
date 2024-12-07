@@ -126,3 +126,13 @@ img {
 p {
     text-indent: 50px;
 }
+
+#chat-box {
+    background-color: lightgray;
+    padding: 20px;
+    border-width: 12px;
+    border-color: black;
+    border-radius: 1cm;
+    min-height: 500px;
+    width: 500px;
+}
