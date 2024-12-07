@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Home } from './home/home';
 import { Login } from './login/login';
-import { LeaderBoard } from './leaderboard/leaderboard';
+import { Chat } from './chat/chat';
 import { MyStats } from './my_stats/my_stats';
 import { AuthState } from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -45,12 +45,12 @@ function App() {
                 </li>
                 <li className="nav-item">
                   <NavLink
-                    to="/leaderboard"
+                    to="/chat"
                     className="nav-link"
-                    id={`${activeTab === 'leaderboard' ? 'active-tab-id' : 'inactive-tab-id'}`}
-                    onClick={() => setActiveTab('leaderboard')}
+                    id={`${activeTab === 'chat' ? 'active-tab-id' : 'inactive-tab-id'}`}
+                    onClick={() => setActiveTab('chat')}
                   >
-                    <b>LeaderBoard</b>
+                    <b>Chat</b>
                   </NavLink>               
                 </li>
                 <li className="nav-item">
@@ -82,7 +82,7 @@ function App() {
                   setActiveTab('login')
                 }}
               />} />
-          <Route path='/leaderboard' element={<LeaderBoard />} />
+          <Route path='/chat' element={<Chat authState={authState}/>} />
           <Route path='/my_stats' element={<MyStats authState={authState}/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
