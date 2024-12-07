@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const DB = require('./database.js');
 const authCookieName = 'token';
+const { peerProxy } = require('./peerProxy.js');
 
 const uuid = require('uuid');
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -220,3 +221,5 @@ function setAuthCookie(res, authToken) {
       sameSite: 'strict',
     });
 }
+
+peerProxy(httpService);
