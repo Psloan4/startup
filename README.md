@@ -47,4 +47,9 @@ The key features of this project include:
 - Added authentication using cookies, so the token is stored as a cookie and is used to access certain features available to those who have signed in
 - Created a secure API that associates the user with an authentication token, in order to manage things like updated user progress and goals
 - Updated the frontend to more clearly reflect whether or not the user has been logged in
-- 
+##Web Socket
+- Created a web socket that runs off of the service, allowing clients to connect and distribute messages amongst themselves
+- Added a chat page that will open if logged in, allowing users to live chat with anyone else connected and logged in to the website concurrently
+- Frontend connects to the web socket, sending and receiving packets that include messages from users
+- Displayed data in the chat page within a box for easy chat readability
+- NOTE: For some reason, github stopped working halfway through my implementation on vscode, so I was unable to commit a lot of the content I created, that will probably show in the push history
