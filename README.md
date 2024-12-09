@@ -19,35 +19,35 @@ The key features of this project include:
 **Service:** retrieves data of other users, retrives global data for specified exercises, and submits goals and logs
 **DB/Login:** Stores users, exercise log history, and goals
 **WebSocket:** as users update their private data, global data will be updated according, and adjusts global standings
-##HTML
+## HTML
 - HTML documentation will include the different webpages accessable within the startup website
 - These pages include index, login, leaderboards, and personal statistics pages
 - the login and statistics pages will include connection to a database storing the data for each user
 - a websocket connection will be plugged into the leaderboard page, in which you can select a catagory to display, and compare your inputted number with the average case in the database
 - The format is as follows: basic navigation features in the header, a main body which includes the contents of the desired page, and a footer linking to the creator (me) and my repository
-##CSS
+## CSS
 - There is a main.css file in the StartupFiles that controls CSS for all the overarching design
 - Seperate CSS pages exist/can be created for specific pages which need greater control over their design
 - It is designed to keep the header anchored to the top, with tabs controlling which page you are looking at
 - The contents of the main section are aligned to the center, controlled by the page size
 - Bootstrap was used for the tabs at the top of the screen, making navigation more intuitive
-##React
+## React
 - restructured the project so it now builds off a root react app, that dynamically creates the html file of the whole project
 - changed routing to now navigate using react Route componenets for more streamlined operation
 - used states to control the navigation element that should be highlighted, and the username that is displayed on login
 - added basic login logout functionality, although it is currently bare bones, as this will largely be replaced when we get to services
-##Service
+## Service
 - In this version, I implemented a service in the file index.js
 - The service currently contains all the working backend for logging in a user, creating a user, and signing out a user. Frameworks have been built for saving different goals and progress.
 - The front end is connected for the login functionality
 - Additionally, the home screen also is connected to an API which will get a random inspiriational quote for the user.
 - all of this is implemented using express
-##Startup
+## Startup
 - Got my service connected to a new file database.js. It connects to mongodb, and is able to create and login new users, and manages the users progress scores and goals
 - Added authentication using cookies, so the token is stored as a cookie and is used to access certain features available to those who have signed in
 - Created a secure API that associates the user with an authentication token, in order to manage things like updated user progress and goals
 - Updated the frontend to more clearly reflect whether or not the user has been logged in
-##Web Socket
+## Web Socket
 - Created a web socket that runs off of the service, allowing clients to connect and distribute messages amongst themselves
 - Added a chat page that will open if logged in, allowing users to live chat with anyone else connected and logged in to the website concurrently
 - Frontend connects to the web socket, sending and receiving packets that include messages from users
