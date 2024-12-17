@@ -127,3 +127,92 @@ So, banana is a subdomain of fruit, which itself is a subdomain of bozo.click.
 - useState returns a tuple of first a variable that can be dynamically updated (i think), and a function that is called to update that value
 - Routers are used to create a custom header object that is easily injected into all html pages, as opposed to just copying it in manually
 - You set a router path by using a NavLink element, where to="/yourObject", where yourObeject is a call of a function that returns the object or page you want
+
+## Final
+
+## HTTP Services
+HTTP (Hypertext Transfer Protocol) services are essential for communication between a client (e.g., web browser, mobile app) and a server over the web. They allow the client to send requests (GET, POST, PUT, DELETE, etc.) to perform operations such as fetching resources, submitting data, or modifying server-side resources. Key concepts include REST (Representational State Transfer), APIs, and status codes for error handling.
+
+### HTTP Request and Response Objects
+HTTP communication is based on the exchange of **request** and **response** objects:
+
+- **Request Object**: Sent by the client to initiate an action on the server.  
+  Key components of an HTTP request:
+  - **Request Line**: Contains the HTTP method (e.g., GET, POST), the URL path, and the HTTP version (e.g., HTTP/1.1).
+  - **Headers**: Metadata in key-value pairs (e.g., `Content-Type`, `Authorization`) that provide information about the request or client.
+  - **Body** (Optional): Contains data for the server (e.g., JSON, form data) in methods like POST or PUT.
+
+- **Response Object**: Sent by the server as a reply to the client.  
+  Key components of an HTTP response:
+  - **Status Line**: Includes the HTTP version, status code (e.g., 200 OK, 404 Not Found), and a status message.
+  - **Headers**: Metadata in key-value pairs (e.g., `Content-Type`, `Set-Cookie`) that provide information about the response or server.
+  - **Body** (Optional): Contains the actual resource or data returned by the server (e.g., HTML, JSON, an image).
+
+### HTTP Methods (Types)
+HTTP defines several methods, each serving a specific purpose:
+- **GET**: Retrieve data from the server (e.g., fetching a webpage).
+- **POST**: Send data to the server (e.g., submitting a form).
+- **PUT**: Update or replace an existing resource on the server.
+- **DELETE**: Remove a resource from the server.
+- **PATCH**: Partially update a resource.
+- **HEAD**: Retrieve only the headers for a resource without the body.
+- **OPTIONS**: Fetch allowed HTTP methods for a resource.
+- **CONNECT/TRACE**: Special-purpose methods for tunneling and debugging.
+
+### Structure of URLs in HTTP
+A URL (Uniform Resource Locator) specifies the address of a resource on the web and guides HTTP operations.  
+Key components of a URL:
+- **Scheme**: Protocol used (e.g., `http`, `https`).
+- **Host**: Domain name or IP address of the server (e.g., `example.com`).
+- **Port** (Optional): Communication port (e.g., `:80` for HTTP, `:443` for HTTPS).
+- **Path**: Specifies the resource on the server (e.g., `/api/users`).
+- **Query Parameters** (Optional): Key-value pairs providing additional data (e.g., `?id=123&name=John`).
+- **Fragment** (Optional): Reference to a section within a resource (e.g., `#section1`).
+
+### How Requests and URLs Relate
+- The **URL** defines the resource location and includes any parameters needed for the request.
+- The **HTTP request method** determines the action to perform on the resource identified by the URL.
+- Query parameters in the URL provide additional input for GET requests, while POST or PUT data is sent in the request body.
+- Responses provide resources or feedback based on the request’s URL and method.
+
+---
+
+## Mongo Database Operations
+MongoDB is a NoSQL database that uses collections and documents instead of tables and rows. Common operations include:
+- **CRUD Operations**: Create (insert), Read (find), Update, and Delete documents.
+- **Querying**: Use JSON-like queries to filter and retrieve data.
+- **Indexing**: Optimize query performance with indexes.
+- **Aggregation**: Process and analyze data using the aggregation framework.
+- **Transactions**: Ensure multiple operations occur atomically when needed.
+
+---
+
+## Authentication Services
+Authentication services verify the identity of users or systems before granting access to resources. Common methods include:
+- **Session-based Authentication**: Storing user sessions on the server.
+- **Token-based Authentication**: Using tokens (e.g., JWT) for stateless authentication.
+- **OAuth**: Allowing third-party services to authenticate users (e.g., Google Sign-In).
+- **Multi-Factor Authentication (MFA)**: Adding extra layers of security, such as SMS codes or biometric verification.
+
+---
+
+## WebSockets
+WebSockets provide a full-duplex, persistent connection between a client and a server, enabling real-time communication. Unlike HTTP, WebSockets allow data to be sent and received simultaneously without repeatedly establishing connections. Common uses include live chat applications, real-time notifications, and multiplayer games.
+
+---
+
+## Security, Including OWASP Top 10
+Security in web development focuses on protecting applications, user data, and servers from threats and vulnerabilities. The **OWASP Top 10** is a list of the most critical web application security risks:
+
+1. **Broken Access Control**: Unauthorized access to resources.
+2. **Cryptographic Failures**: Weak encryption or mishandling of sensitive data.
+3. **Injection**: Executing unintended commands (e.g., SQL Injection).
+4. **Insecure Design**: Poorly designed systems that lack security measures.
+5. **Security Misconfiguration**: Improperly configured servers or apps.
+6. **Vulnerable and Outdated Components**: Using outdated libraries or software.
+7. **Identification and Authentication Failures**: Flaws in login or session management.
+8. **Software and Data Integrity Failures**: Untrusted software or updates.
+9. **Security Logging and Monitoring Failures**: Insufficient logging and monitoring.
+10. **Server-Side Request Forgery (SSRF)**: Forcing servers to make unintended requests.
+
+Understanding these principles helps in building secure web applications and mitigating potential attacks.
